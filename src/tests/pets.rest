@@ -19,14 +19,13 @@ Content-Type: application/json
   "age": 2,
   "species": "cachorro",
   "size": "grande",
-  "status": "adopted",
   "description":"descrição para teste"
 }
 
 
 ### Criar pet (adopter)
 POST {{baseURL}}/pets/
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInJvbGUiOiJhZG9wdGVyIiwiZW1haWwiOiJ0ZXN0ZWFkb3B0ZXJAZ21haWwuY29tIiwiaWF0IjoxNzgxODYyOTk2LCJleHAiOjE3ODE4NjY1OTZ9.vN6SIfqJZuFuL9z7pnvnwSFiF44wib4Sg1LpGxK6MxA
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJhZG1pbiIsImVtYWlsIjoidGVzdGVhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3ODE4NjY0NTksImV4cCI6MTc4MTg3MDA1OX0.pAYzKqKY8CnuL8dR-DDpMfqi4rMGWC7toqWvoxf2Pbg
 Content-Type: application/json
 
 {
@@ -34,7 +33,6 @@ Content-Type: application/json
   "age": 2,
   "species": "cachorro",
   "size": "grande",
-  "status": "adopted",
   "description":"descrição para teste"
 }
 
@@ -48,7 +46,6 @@ Content-Type: application/json
 "age": 2,
 "species": "cachorro",
 "size": "grande",
-"status": "adopted",
 "description":"descrição para teste"
 }
 

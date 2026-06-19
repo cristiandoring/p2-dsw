@@ -12,7 +12,10 @@ class AdoptionService {
   }
 
   static async realizarAdocao(dados, currentUser) {
-    if (currentUser.role !== 'adopter') {
+    const role =
+      currentUser.role || (currentUser.user && currentUser.user.role);
+
+    if (role !== 'adopter') {
       throw new Error(
         'Acesso negado. Apenas adotantes podem realizar uma adoção.'
       );
@@ -32,11 +35,30 @@ class AdoptionService {
       throw new Error('Este pet já foi adotado.');
     }
 
-    // 1. Cria o registro na tabela de adoções vinculando o pet ao usuário
-    const adocaoId = await AdoptionModel.criarAdocao(pet_id, currentUser.id);
+    const usuarioId =
+      currentUser.userId ||
+      currentUser.id ||
+      (currentUser.user && currentUser.user.userId) ||
+      (currentUser.user && currentUser.user.id);
 
-    // 2. Atualiza o status do pet para 'adopted' na tabela de pets
-    await PetModel.atualizarPet(pet_id, { status: 'adopted' });
+    if (!usuarioId) {
+      throw new Error('Não foi possível identificar o ID do usuário no token.');
+    }
+
+    const objetoAdocao = {
+      user_id: usuarioId,
+      pet_id: pet_id,
+      adoption_date: new Date(),
+    };
+
+    const adocaoId = await AdoptionModel.criarAdocao(objetoAdocao);
+
+    const dadosAtualizacaoPet = {
+      ...pet,
+      status: 'adopted',
+    };
+
+    await PetModel.atualizarPet(pet_id, dadosAtualizacaoPet);
 
     return { message: 'Adoção realizada com sucesso!', id: adocaoId };
   }

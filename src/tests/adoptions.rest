@@ -1,0 +1,15 @@
+@baseURL = http://localhost:3000
+
+### Listar Todas as Adoções 
+GET {{baseURL}}/adoptions
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJhZG1pbiIsImVtYWlsIjoidGVzdGVhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3ODE4NjY0NTksImV4cCI6MTc4MTg3MDA1OX0.pAYzKqKY8CnuL8dR-DDpMfqi4rMGWC7toqWvoxf2Pbg
+
+### Realizar uma Adoção
+POST {{baseURL}}/adoptions
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInJvbGUiOiJhZG9wdGVyIiwiZW1haWwiOiJ0ZXN0ZWFkb3B0ZXJAZ21haWwuY29tIiwiaWF0IjoxNzgxODY3MzQzLCJleHAiOjE3ODE4NzA5NDN9.ChJtnDe4AhN2LaRaOdcznnHbpQSRKCPdffFE-A2kHkA
+Content-Type: application/json
+
+{
+    
+  "pet_id": 8
+}
