@@ -1,0 +1,57 @@
+@baseURL = http://localhost:3000
+
+
+### Listar Todos os pets
+GET {{baseURL}}/pets
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJhZG1pbiIsImVtYWlsIjoidGVzdGVhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3ODE4NjY0NTksImV4cCI6MTc4MTg3MDA1OX0.pAYzKqKY8CnuL8dR-DDpMfqi4rMGWC7toqWvoxf2Pbg
+
+### Listar pet por id (admin)
+GET {{baseURL}}/pets/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJhZG1pbiIsImVtYWlsIjoidGVzdGVhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3ODE4NjI3NDksImV4cCI6MTc4MTg2NjM0OX0.oIFt-kvugJHXayMFquaWOCR3kNucdHD85jJgQ4B0oPo
+
+### Criar pet (admin)
+POST {{baseURL}}/pets/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJhZG1pbiIsImVtYWlsIjoidGVzdGVhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3ODE4NjY0NTksImV4cCI6MTc4MTg3MDA1OX0.pAYzKqKY8CnuL8dR-DDpMfqi4rMGWC7toqWvoxf2Pbg
+Content-Type: application/json
+
+{
+  "name": "teste pet 4",
+  "age": 2,
+  "species": "cachorro",
+  "size": "grande",
+  "status": "adopted",
+  "description":"descrição para teste"
+}
+
+
+### Criar pet (adopter)
+POST {{baseURL}}/pets/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInJvbGUiOiJhZG9wdGVyIiwiZW1haWwiOiJ0ZXN0ZWFkb3B0ZXJAZ21haWwuY29tIiwiaWF0IjoxNzgxODYyOTk2LCJleHAiOjE3ODE4NjY1OTZ9.vN6SIfqJZuFuL9z7pnvnwSFiF44wib4Sg1LpGxK6MxA
+Content-Type: application/json
+
+{
+  "name": "teste pet",
+  "age": 2,
+  "species": "cachorro",
+  "size": "grande",
+  "status": "adopted",
+  "description":"descrição para teste"
+}
+
+### Atualizar pet (admin)
+PUT {{baseURL}}/pets/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJhZG1pbiIsImVtYWlsIjoidGVzdGVhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3ODE4NjY0NTksImV4cCI6MTc4MTg3MDA1OX0.pAYzKqKY8CnuL8dR-DDpMfqi4rMGWC7toqWvoxf2Pbg
+Content-Type: application/json
+
+{
+"name": "teste pet 1 atualizado",
+"age": 2,
+"species": "cachorro",
+"size": "grande",
+"status": "adopted",
+"description":"descrição para teste"
+}
+
+### Deletar pet (admin)
+DELETE {{baseURL}}/pets/7
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJhZG1pbiIsImVtYWlsIjoidGVzdGVhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3ODE4NjY0NTksImV4cCI6MTc4MTg3MDA1OX0.pAYzKqKY8CnuL8dR-DDpMfqi4rMGWC7toqWvoxf2Pbg

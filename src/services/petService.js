@@ -8,12 +8,14 @@ class PetService {
       );
     }
 
-    const { name, species } = pet;
-    if (!name || !species) {
-      throw new Error('Nome e espécie do pet são obrigatórios');
+    const statusPermitidos = ['available', 'adopted'];
+    if (pet.status && !statusPermitidos.includes(pet.status)) {
+      throw new Error('Status inválido. Escolha entre available ou adopted.');
     }
 
-    pet.status = 'available';
+    if (!pet.status) {
+      pet.status = 'available';
+    }
 
     const id = await PetModel.criarPet(pet);
     return { message: 'Pet cadastrado com sucesso', id };
@@ -38,6 +40,14 @@ class PetService {
       );
     }
 
+    const statusPermitidos = ['available', 'adopted'];
+    if (
+      dadosAtualizados.status &&
+      !statusPermitidos.includes(dadosAtualizados.status)
+    ) {
+      throw new Error('Status inválido. Escolha entre available ou adopted.');
+    }
+
     const petExistente = await PetModel.buscarPetPorId(id);
     if (!petExistente) {
       throw new Error('Pet não encontrado para atualização');
@@ -48,7 +58,7 @@ class PetService {
     }
 
     await PetModel.atualizarPet(id, dadosAtualizados);
-    return { message: 'Pet updated successfully' };
+    return { message: 'Pet atualizado com sucesso' };
   }
 
   static async deletarPetSistema(id, currentUser) {
