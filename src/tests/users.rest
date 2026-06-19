@@ -1,0 +1,91 @@
+@baseURL = http://localhost:3000
+
+### Criar usuario admin
+POST {{baseURL}}/auth/users
+Content-Type: application/json
+
+{
+  "name": "teste admin",
+  "email": "testeadmin@gmail.com",
+  "password": "senha123",
+  "phone": "54999999999",
+  "role": "admin"
+}
+
+### Criar usuario adopter
+POST {{baseURL}}/auth/users
+Content-Type: application/json
+
+{
+  "name": "teste adopter 2",
+  "email": "testeadopter2@gmail.com",
+  "password": "senha",
+  "phone": "54999999999",
+  "role": "adopter"
+}
+
+
+### Fazer Login como Administrador
+# @name loginAdmin
+POST {{baseURL}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "testeadmin@gmail.com",
+  "password": "senha123"
+}
+
+### Realizar Login como Adopter (Adotante)
+# @name loginAdopter
+POST {{baseURL}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "testeadopter@gmail.com",
+  "password": "senha"
+}
+
+
+### Listar Todos os Usuários
+GET {{baseURL}}/auth/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJhZG1pbiIsImVtYWlsIjoidGVzdGVhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3ODE4NjI3NDksImV4cCI6MTc4MTg2NjM0OX0.oIFt-kvugJHXayMFquaWOCR3kNucdHD85jJgQ4B0oPo
+
+### Listar usuario por id (admin)
+GET {{baseURL}}/auth/users/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJhZG1pbiIsImVtYWlsIjoidGVzdGVhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3ODE4NjI3NDksImV4cCI6MTc4MTg2NjM0OX0.oIFt-kvugJHXayMFquaWOCR3kNucdHD85jJgQ4B0oPo
+
+### Listar usuario por id (adopter) - listar ele mesmo
+GET {{baseURL}}/auth/users/2
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInJvbGUiOiJhZG9wdGVyIiwiZW1haWwiOiJ0ZXN0ZWFkb3B0ZXJAZ21haWwuY29tIiwiaWF0IjoxNzgxODYyOTk2LCJleHAiOjE3ODE4NjY1OTZ9.vN6SIfqJZuFuL9z7pnvnwSFiF44wib4Sg1LpGxK6MxA
+
+### Listar usuario por id (adopter) - outro adopter
+GET {{baseURL}}/auth/users/3
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInJvbGUiOiJhZG9wdGVyIiwiZW1haWwiOiJ0ZXN0ZWFkb3B0ZXJAZ21haWwuY29tIiwiaWF0IjoxNzgxODYyOTk2LCJleHAiOjE3ODE4NjY1OTZ9.vN6SIfqJZuFuL9z7pnvnwSFiF44wib4Sg1LpGxK6MxA
+
+### Admin edita qualquer usuario
+PUT {{baseURL}}/auth/users/2
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInJvbGUiOiJhZG9wdGVyIiwiZW1haWwiOiJ0ZXN0ZWFkb3B0ZXJAZ21haWwuY29tIiwiaWF0IjoxNzgxODYyOTk2LCJleHAiOjE3ODE4NjY1OTZ9.vN6SIfqJZuFuL9z7pnvnwSFiF44wib4Sg1LpGxK6MxA
+Content-Type: application/json
+
+{
+  "name": "Alterado pelo Admin",
+  "email": "testeadopter@gmail.com",
+  "phone": "54999999999",
+  "role": "adopter"
+}
+
+### Adopter edita ele mesmo
+PUT {{baseURL}}/auth/users/2
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInJvbGUiOiJhZG9wdGVyIiwiZW1haWwiOiJ0ZXN0ZWFkb3B0ZXJAZ21haWwuY29tIiwiaWF0IjoxNzgxODYyOTk2LCJleHAiOjE3ODE4NjY1OTZ9.vN6SIfqJZuFuL9z7pnvnwSFiF44wib4Sg1LpGxK6MxA
+Content-Type: application/json
+
+{
+  "name": "Alterado pelo Adopter II",
+  "email": "testeadopter@gmail.com",
+  "phone": "54999999999",
+  "role": "adopter"
+}
+
+### Adopter deleta ele mesmo
+DELETE {{baseURL}}/auth/users/5
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJhZG1pbiIsImVtYWlsIjoidGVzdGVhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3ODE4NjI3NDksImV4cCI6MTc4MTg2NjM0OX0.oIFt-kvugJHXayMFquaWOCR3kNucdHD85jJgQ4B0oPo

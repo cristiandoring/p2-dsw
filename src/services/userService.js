@@ -4,6 +4,14 @@ const UserModel = require('../models/userModel');
 
 class UserService {
   static async registrarUsuario(user) {
+    const usuarios = await UserModel.listarUsuarios();
+    const emailExistente = usuarios.find((u) => u.email === user.email);
+
+    if (emailExistente) {
+      throw new Error('Já existe um usuário com esse e-mail');
+    }
+
+    // Define a role padrão caso não seja enviada
     if (!user.role) {
       user.role = 'adopter';
     }
@@ -16,8 +24,7 @@ class UserService {
   }
 
   static async loginUsuario({ email, password }) {
-    const usuarios = await UserModel.listarUsuarios();
-    const user = usuarios.find((u) => u.email === email);
+    const user = await UserModel.buscarPorEmailComSenha(email);
 
     if (!user) {
       throw new Error('Usuário não encontrado');
@@ -34,19 +41,22 @@ class UserService {
       { expiresIn: '1h' }
     );
 
-    return { token };
+    return {
+      message: 'Login realizado com sucesso',
+      token,
+    };
   }
 
   static async listarTodosUsuarios(currentUser) {
     if (currentUser.role !== 'admin') {
       throw new Error('Acesso negado. Apenas administradores.');
     }
+
     const usuarios = await UserModel.listarUsuarios();
     return usuarios.map(
       ({ password, ...userWithoutPassword }) => userWithoutPassword
     );
   }
-
   static async buscarUsuario(id, currentUser) {
     if (currentUser.role !== 'admin' && currentUser.userId !== Number(id)) {
       throw new Error(
@@ -75,6 +85,19 @@ class UserService {
       throw new Error('Usuário não encontrado para atualização');
     }
 
+    if (
+      dadosAtualizados.email &&
+      dadosAtualizados.email !== usuarioExistente.email
+    ) {
+      const usuarios = await UserModel.listarUsuarios();
+      const emailEmUso = usuarios.find(
+        (u) => u.email === dadosAtualizados.email && u.id !== Number(id)
+      );
+      if (emailEmUso) {
+        throw new Error('Já existe um usuário com esse e-mail');
+      }
+    }
+
     if (dadosAtualizados.password) {
       dadosAtualizados.password = await bcrypt.hash(
         dadosAtualizados.password,
@@ -83,7 +106,7 @@ class UserService {
     }
 
     await UserModel.atualizarUsuario(id, dadosAtualizados);
-    return { message: 'Usuário updated successfully' };
+    return { message: 'Usuário atualizado com sucesso' };
   }
 
   static async deletarUsuarioSistema(id, currentUser) {

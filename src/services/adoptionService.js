@@ -1,5 +1,5 @@
-const AdoptionModel = require('../models/AdoptionModel');
-const PetModel = require('../models/PetModel');
+const AdoptionModel = require('../models/adoptionModel');
+const PetModel = require('../models/petModel');
 
 class AdoptionService {
   static async criarAdocao(adoptionData, currentUser) {

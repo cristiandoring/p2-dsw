@@ -1,7 +1,6 @@
 const db = require('../config/database');
 
 class UserModel {
-
   //criar usuário
   static async criarUsuarios(user) {
     const { name, email, password, phone, role } = user;
@@ -43,6 +42,14 @@ class UserModel {
   static async deletarUsuario(id) {
     await db.query('DELETE FROM users WHERE id = ?', [id]);
     return true;
+  }
+
+  static async buscarPorEmailComSenha(email) {
+    const [rows] = await db.query(
+      'SELECT id, name, email, password, phone, role FROM users WHERE email = ?',
+      [email]
+    );
+    return rows[0];
   }
 }
 
