@@ -1,7 +1,7 @@
 const PetModel = require('../models/petModel');
 
 class PetService {
-  static async registrarPet(pet, currentUser) {
+  static async criarNovoPet(pet, currentUser) {
     if (currentUser.role !== 'admin') {
       throw new Error(
         'Acesso negado. Apenas administradores podem cadastrar pets.'
@@ -23,7 +23,7 @@ class PetService {
     return await PetModel.listarPets();
   }
 
-  static async buscarPet(id) {
+  static async buscarPetPorId(id) {
     const pet = await PetModel.buscarPetPorId(id);
     if (!pet) {
       throw new Error('Pet não encontrado');
@@ -48,7 +48,7 @@ class PetService {
     }
 
     await PetModel.atualizarPet(id, dadosAtualizados);
-    return { message: 'Pet atualizado com sucesso' };
+    return { message: 'Pet updated successfully' };
   }
 
   static async deletarPetSistema(id, currentUser) {
