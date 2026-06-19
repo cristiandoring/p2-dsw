@@ -29,7 +29,7 @@ class UserService {
     }
 
     const token = jwt.sign(
-      { userId: user.id, role: user.role },
+      { userId: user.id, role: user.role, email: user.email },
       process.env.JWT_SECRET,
       { expiresIn: '1h' }
     );
@@ -83,7 +83,7 @@ class UserService {
     }
 
     await UserModel.atualizarUsuario(id, dadosAtualizados);
-    return { message: 'Usuário atualizado com sucesso' };
+    return { message: 'Usuário updated successfully' };
   }
 
   static async deletarUsuarioSistema(id, currentUser) {
