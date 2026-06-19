@@ -2,58 +2,43 @@ const AdoptionModel = require('../models/adoptionModel');
 const PetModel = require('../models/petModel');
 
 class AdoptionService {
-  static async criarAdocao(adoptionData, currentUser) {
+  static async listarTodasAdocoes(currentUser) {
+    if (currentUser.role !== 'admin') {
+      throw new Error(
+        'Acesso negado. Apenas administradores podem listar todas as adoções.'
+      );
+    }
+    return await AdoptionModel.listarAdocoes();
+  }
+
+  static async realizarAdocao(dados, currentUser) {
     if (currentUser.role !== 'adopter') {
       throw new Error(
         'Acesso negado. Apenas adotantes podem realizar uma adoção.'
       );
     }
 
-    const { pet_id, adoption_date } = adoptionData;
-    const user_id = currentUser.userId;
+    const { pet_id } = dados;
+    if (!pet_id) {
+      throw new Error('O ID do pet é obrigatório para realizar a adoção.');
+    }
 
     const pet = await PetModel.buscarPetPorId(pet_id);
     if (!pet) {
       throw new Error('Pet não encontrado.');
     }
 
-    if (pet.status !== 'available') {
-      throw new Error('Este pet não está disponível para adoção.');
+    if (pet.status === 'adopted') {
+      throw new Error('Este pet já foi adotado.');
     }
 
-    const adocoesExistentes = await AdoptionModel.listarAdocoes();
-    const jaAdotou = adocoesExistentes.some(
-      (a) => a.user_id === user_id && a.pet_id === Number(pet_id)
-    );
-    if (jaAdotou) {
-      throw new Error(
-        'Você já enviou uma solicitação ou adotou este pet anteriormente.'
-      );
-    }
+    // 1. Cria o registro na tabela de adoções vinculando o pet ao usuário
+    const adocaoId = await AdoptionModel.criarAdocao(pet_id, currentUser.id);
 
-    const dataAdocao = adoption_date || new Date().toISOString().slice(0, 10);
-
-    const newAdoptionId = await AdoptionModel.criarAdocao({
-      user_id,
-      pet_id,
-      adoption_date: dataAdocao,
-    });
-
+    // 2. Atualiza o status do pet para 'adopted' na tabela de pets
     await PetModel.atualizarPet(pet_id, { status: 'adopted' });
 
-    return {
-      id: newAdoptionId,
-      message: 'Adoção realizada com sucesso!',
-      pet_id,
-    };
-  }
-
-  static async listarAdocoes() {
-    const adocoes = await AdoptionModel.listarAdocoes();
-    if (adocoes.length === 0) {
-      return { message: 'Nenhuma adoção encontrada.', data: [] };
-    }
-    return adocoes;
+    return { message: 'Adoção realizada com sucesso!', id: adocaoId };
   }
 }
 
