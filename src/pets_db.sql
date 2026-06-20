@@ -30,9 +30,4 @@ CREATE TABLE adoptions (
     FOREIGN KEY (pet_id) REFERENCES pets(id)
 );
 
-INSERT INTO users (name, email, password, phone, role) VALUES
-('usuario', 'usuario@ifrs.edu.br', 
-'$2b$10$382cEJJYi5YxSBNvWmufHeoPHX3dqIB9NP2R2XWzt/w.DnC0gmCr2', '54999999999', 'user'),
-('admin', 'admin@ifrs.edu.br',
-'$2b$10$/JLXJ62EBlk1bNq0xmpvMuTLDJb6AWmZUs74lgEJb4Z.J9.3kFJM.', '54999999999', 'admin');
 

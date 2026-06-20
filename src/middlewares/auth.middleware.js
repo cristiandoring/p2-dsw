@@ -23,9 +23,7 @@ function authenticateToken(req, res, next) {
 function authorizeRole(role) {
   return (req, res, next) => {
     if (!req.user || req.user.role !== role) {
-      return res
-        .status(403)
-        .json({ message: 'Acesso negado. Permissão insuficiente.' });
+      return res.status(403).json({ message: 'Acesso negado.' });
     }
     next();
   };
