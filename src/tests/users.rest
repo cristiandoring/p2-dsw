@@ -1,7 +1,7 @@
 @baseURL = http://localhost:3000
 
 ### Criar usuario admin
-POST {{baseURL}}/auth/users
+POST {{baseURL}}/users
 Content-Type: application/json
 
 {
@@ -13,7 +13,7 @@ Content-Type: application/json
 }
 
 ### Criar usuario adopter
-POST {{baseURL}}/auth/users
+POST {{baseURL}}/users
 Content-Type: application/json
 
 {
@@ -26,7 +26,7 @@ Content-Type: application/json
 
 ### Fazer Login como Administrador
 # @name loginAdmin
-POST {{baseURL}}/auth/login
+POST {{baseURL}}/login
 Content-Type: application/json
 
 {
@@ -36,7 +36,7 @@ Content-Type: application/json
 
 ### Realizar Login como Adopter (Adotante)
 # @name loginAdopter
-POST {{baseURL}}/auth/login
+POST {{baseURL}}/login
 Content-Type: application/json
 
 {
@@ -45,19 +45,19 @@ Content-Type: application/json
 }
 
 ### Listar Todos os Usuários
-GET {{baseURL}}/auth/users
+GET {{baseURL}}/users
 Authorization: Bearer {{loginAdmin.response.body.token}}
 
 ### Listar usuario por id (admin)
-GET {{baseURL}}/auth/users/2
+GET {{baseURL}}/users/3
 Authorization: Bearer {{loginAdmin.response.body.token}}
 
 ### Listar usuario por id (adopter) - listar ele mesmo
-GET {{baseURL}}/auth/users/1
+GET {{baseURL}}/users/1
 Authorization: Bearer {{loginAdopter.response.body.token}}
 
 ### Admin edita qualquer usuario
-PUT {{baseURL}}/auth/users/2
+PUT {{baseURL}}/users/2
 Authorization: Bearer {{loginAdmin.response.body.token}}
 Content-Type: application/json
 
@@ -69,5 +69,5 @@ Content-Type: application/json
 }
 
 ### Adopter deleta ele mesmo DELETE
-DELETE  {{baseURL}}/auth/users/4
+DELETE {{baseURL}}/users/4
 Authorization: Bearer {{loginAdopter.response.body.token}}

@@ -1,8 +1,10 @@
 const express = require('express');
-const PublicController = require('../controllers/public.controller');
+const PetController = require('../controllers/pets.controller');
+const AuthController = require('../controllers/auth.controller');
+
 const router = express.Router();
 
-router.get('/home', PublicController.home);
-router.get('/pets/available', PublicController.listarDisponiveis);
+router.get('/pets/available', PetController.listarDisponiveis);
+router.post('/users', AuthController.register);
 
 module.exports = router;

@@ -10,7 +10,7 @@
 
 ### Fazer Login como Administrador
 # @name loginAdmin
-POST {{baseURL}}/auth/login
+POST {{baseURL}}/login
 Content-Type: application/json
 
 {
@@ -20,7 +20,7 @@ Content-Type: application/json
 
 ### Realizar Login como Adopter (Adotante)
 # @name loginAdopter
-POST {{baseURL}}/auth/login
+POST {{baseURL}}/login
 Content-Type: application/json
 
 {
