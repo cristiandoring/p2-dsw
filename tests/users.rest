@@ -20,8 +20,7 @@ Content-Type: application/json
   "name": "teste adopter",
   "email": "testeadopter@gmail.com",
   "password": "senha",
-  "phone": "54999999999",
-  "role": "adopter"
+  "phone": "54999999999"
 }
 
 ### Fazer Login como Administrador
