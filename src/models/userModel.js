@@ -30,10 +30,20 @@ class UserModel {
 
   // atualizar usuário de um determinado id
   static async atualizarUsuario(id, user) {
-    const { name, email, password, phone, role } = user; //
+    const [rows] = await db.query('SELECT password FROM users WHERE id = ?', [
+      id,
+    ]);
+    const senhaAtual = rows[0]?.password;
+
+    const name = user.name ?? null;
+    const email = user.email ?? null;
+    const password = user.password ?? senhaAtual;
+    const phone = user.phone ?? null;
+    const role = user.role ?? null;
+
     await db.query(
-      'UPDATE users SET name = ?, email = ?, password = ?, phone = ?, role = ? WHERE id = ?', //
-      [name, email, password, phone, role, id] //
+      'UPDATE users SET name = ?, email = ?, password = ?, phone = ?, role = ? WHERE id = ?',
+      [name, email, password, phone, role, id]
     );
     return true;
   }
