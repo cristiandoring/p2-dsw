@@ -33,13 +33,13 @@ Content-Type: application/json
 
 ### Listar Todas as Adoções (Admin)
 GET {{baseURL}}/adoptions
-Authorization: Bearer {{tokenAdopter}}
+Authorization: Bearer {{tokenAdmin}}
 
 ### Realizar uma Adoção (Adopter)
 POST {{baseURL}}/adoptions
-Authorization: Bearer {{tokenAdmin}}
+Authorization: Bearer {{tokenAdopter}}
 Content-Type: application/json
 
 {
-  "pet_id": 2
+  "pet_id": 3
 }

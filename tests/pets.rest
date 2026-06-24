@@ -31,13 +31,16 @@ Content-Type: application/json
 ##################################
 
 
+### Listar todos os pets available
+GET {{baseURL}}/pets/available
+
 ### Listar Todos os pets
 GET {{baseURL}}/pets
-Authorization: Bearer {{tokenAdopter}}
+Authorization: Bearer {{tokenAdmin}}
 
 ### Listar pet por id (admin)
-GET {{baseURL}}/pets/1
-Authorization: Bearer {{tokenAdopter}}
+GET {{baseURL}}/pets/5
+Authorization: Bearer {{tokenAdmin}}
 
 ### Criar pet (admin)
 POST {{baseURL}}/pets/
@@ -45,7 +48,7 @@ Authorization: Bearer {{tokenAdmin}}
 Content-Type: application/json
 
 {
-  "name": "teste pet 2",
+  "name": "pet 1",
   "age": 2,
   "species": "cachorro",
   "size": "grande",
@@ -58,7 +61,7 @@ Authorization: Bearer {{tokenAdopter}}
 Content-Type: application/json
 
 {
-  "name": "teste pet",
+  "name": "pet 2",
   "age": 2,
   "species": "cachorro",
   "size": "grande",
@@ -66,16 +69,16 @@ Content-Type: application/json
 }
 
 ### Atualizar pet (Admin)
-PUT {{baseURL}}/pets/1
+PUT {{baseURL}}/pets/2
 Authorization: Bearer {{tokenAdmin}}
 Content-Type: application/json
 
 {
-  "name": "teste pet atualizado pelo admin",
+  "name": "pet 2 atualizado",
   "age": 3,
   "species": "cachorro",
   "size": "grande",
-  "status": "available",
+  "status": "adopted",
   "description": "descrição alterada com sucesso"
 }
 

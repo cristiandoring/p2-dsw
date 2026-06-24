@@ -28,12 +28,12 @@ class UserModel {
     return rows[0];
   }
 
-  //atualizar usuário de um determinado id
+  // atualizar usuário de um determinado id
   static async atualizarUsuario(id, user) {
-    const { name, email, phone, role } = user;
+    const { name, email, password, phone, role } = user; //
     await db.query(
-      'UPDATE users SET name = ?, email = ?, phone = ?, role = ? WHERE id = ?',
-      [name, email, phone, role, id]
+      'UPDATE users SET name = ?, email = ?, password = ?, phone = ?, role = ? WHERE id = ?', //
+      [name, email, password, phone, role, id] //
     );
     return true;
   }

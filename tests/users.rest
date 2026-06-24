@@ -5,7 +5,7 @@ POST {{baseURL}}/users
 Content-Type: application/json
 
 {
-  "name": "teste admin",
+  "name": "teste admin ",
   "email": "testeadmin@gmail.com",
   "password": "senha123",
   "phone": "54999999999",
@@ -17,7 +17,7 @@ POST {{baseURL}}/users
 Content-Type: application/json
 
 {
-  "name": "teste adopter 2",
+  "name": "teste adopter",
   "email": "testeadopter@gmail.com",
   "password": "senha",
   "phone": "54999999999",
@@ -34,7 +34,7 @@ Content-Type: application/json
   "password": "senha123"
 }
 
-### Realizar Login como Adopter (Adotante)
+### Realizar Login como Adotante
 # @name loginAdopter
 POST {{baseURL}}/login
 Content-Type: application/json
@@ -49,7 +49,7 @@ GET {{baseURL}}/users
 Authorization: Bearer {{loginAdmin.response.body.token}}
 
 ### Listar usuario por id (admin)
-GET {{baseURL}}/users/3
+GET {{baseURL}}/users/2
 Authorization: Bearer {{loginAdmin.response.body.token}}
 
 ### Listar usuario por id (adopter) - listar ele mesmo
@@ -62,12 +62,13 @@ Authorization: Bearer {{loginAdmin.response.body.token}}
 Content-Type: application/json
 
 {
-  "name": "Alterado pelo Admin",
+  "name": "Alterado pelo admin",
   "email": "testeadopter@gmail.com",
+  "password":"senha nova",
   "phone": "54999999999",
   "role": "adopter"
 }
 
 ### Adopter deleta ele mesmo DELETE
-DELETE {{baseURL}}/users/4
-Authorization: Bearer {{loginAdopter.response.body.token}}
+DELETE {{baseURL}}/users/3
+Authorization: Bearer {{loginAdmin.response.body.token}}
