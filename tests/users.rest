@@ -17,8 +17,8 @@ POST {{baseURL}}/users
 Content-Type: application/json
 
 {
-  "name": "teste adopter",
-  "email": "testeadopter@gmail.com",
+  "name": "teste adopter 1",
+  "email": "testeadopter1@gmail.com",
   "password": "senha",
   "phone": "54999999999"
 }
@@ -48,22 +48,22 @@ GET {{baseURL}}/users
 Authorization: Bearer {{loginAdmin.response.body.token}}
 
 ### Listar usuario por id (admin)
-GET {{baseURL}}/users/2
-Authorization: Bearer {{loginAdmin.response.body.token}}
-
-### Listar usuario por id (adopter) - listar ele mesmo
 GET {{baseURL}}/users/1
 Authorization: Bearer {{loginAdopter.response.body.token}}
 
+### Listar usuario por id (adopter) - listar ele mesmo
+GET {{baseURL}}/users/2
+Authorization: Bearer {{loginAdmin.response.body.token}}
+
 ### Admin edita qualquer usuario
 PUT {{baseURL}}/users/2
-Authorization: Bearer {{loginAdmin.response.body.token}}
+Authorization: Bearer {{loginAdopter.response.body.token}}
 Content-Type: application/json
 
 {
-  "name": "Alterado pelo admin",
+  "name": "Alterado pelo adopter",
   "email": "testeadopter@gmail.com",
-  "password":"senha nova",
+  "password":"senha",
   "phone": "54999999999",
   "role": "adopter"
 }

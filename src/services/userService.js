@@ -11,7 +11,6 @@ class UserService {
       throw new Error('Já existe um usuário com esse e-mail');
     }
 
-    // Define a role padrão caso não seja enviada
     if (!user.role) {
       user.role = 'adopter';
     }

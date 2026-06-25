@@ -41,5 +41,5 @@ Authorization: Bearer {{tokenAdopter}}
 Content-Type: application/json
 
 {
-  "pet_id": 3
+  "pet_id": 1
 }

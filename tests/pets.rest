@@ -39,8 +39,8 @@ GET {{baseURL}}/pets
 Authorization: Bearer {{tokenAdmin}}
 
 ### Listar pet por id (admin)
-GET {{baseURL}}/pets/5
-Authorization: Bearer {{tokenAdmin}}
+GET {{baseURL}}/pets/2
+Authorization: Bearer {{tokenAdopter}}
 
 ### Criar pet (admin)
 POST {{baseURL}}/pets/
@@ -48,7 +48,7 @@ Authorization: Bearer {{tokenAdmin}}
 Content-Type: application/json
 
 {
-  "name": "pet 1",
+  "name": "pet 3",
   "age": 2,
   "species": "cachorro",
   "size": "grande",
@@ -57,7 +57,7 @@ Content-Type: application/json
 
 ### Criar pet (adopter)
 POST {{baseURL}}/pets/
-Authorization: Bearer {{tokenAdopter}}
+Authorization: Bearer {{tokenAdmin}}
 Content-Type: application/json
 
 {
@@ -74,14 +74,14 @@ Authorization: Bearer {{tokenAdmin}}
 Content-Type: application/json
 
 {
-  "name": "pet 2 atualizado",
+  "name": "pet 2 atualizado ",
   "age": 3,
   "species": "cachorro",
   "size": "grande",
-  "status": "adopted",
+  "status": "available",
   "description": "descrição alterada com sucesso"
 }
 
 ### Apagar pet (Admin)
-DELETE {{baseURL}}/pets/1
+DELETE {{baseURL}}/pets/3
 Authorization: Bearer {{tokenAdmin}}
